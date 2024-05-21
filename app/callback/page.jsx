@@ -2,13 +2,12 @@
 
 import { AuthContext } from "@/auth/context/auth-context";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useContext, useEffect } from "react";
+import { useContext, useEffect, Suspense } from "react";
 
-export default function Page() {
+function CallbackPage() {
   const { login, user } = useContext(AuthContext);
 
   const searchParams = useSearchParams();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -25,8 +24,16 @@ export default function Page() {
   }, [router, user]);
 
   return (
-    <Suspense fallback={<div>loading...</div>}>
-      <div>loading...</div>
+    <main className="flex w-[100vw] h-[100vh] items-center justify-center">
+      <div>Loading...</div>
+    </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CallbackPage />
     </Suspense>
   );
 }
